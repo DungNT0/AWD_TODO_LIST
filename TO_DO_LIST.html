@@ -127,7 +127,8 @@
 
 </body>
 
-<script>
+<script type="module">
+    // import addNewItem from './add_new_list_item.js';
     $(document).ready(function () {
         console.log("jQuery loaded");
     });
@@ -164,28 +165,10 @@
             $('#my-output-2').html(myInput);
             $('#my-output').html(myInput);
         });
-
-        // loop with each and this
-        $('li').each(function (index, event) {
-
-            console.log(index);
-            console.log(event);
-
-        });
-        // capture clicks and mouseover events
-        $('li').on('click mouseclick', function () {
-
-            // prevent default click
-            event.preventDefault();
-
-            console.log($(this).html());
-
-            $(this).css('text-decoration', 'line-through');
-        });
+        
         // capture click from button
         var count = 1;
         $('#my-button').on('click', function () {
-
             // add new list item to ul
             var myInput2 = $('#my-input-2').val();
             console.log(myInput2);
@@ -194,9 +177,9 @@
             console.log(myInput);
 
             // ammend content on ID
-            $('#nav-menu').append('<li>' + myInput2 + " - " + myInput + '</li>' +
+            $('#nav-menu').append('<div> <li>' + myInput2 + " - " + myInput + '</li>' +
                 '<button class="complete_btn" id="complete_button' + count + '"></button>'
-                + '<button class="delete_btn" id="delete_button' + count + '"></button>' + '</br>');
+                + '<button class="delete_btn" id="delete_button' + count + '"></button> </div>');
 
             count++;
             $(".delete_btn").on('click mouseclick', function () {
@@ -206,7 +189,7 @@
 
                 console.log($(this).html());
 
-                $('li, ul > button').remove();
+                this.parentNode.remove();
             });
 
             $(".complete_btn").on('click mouseclick', function () {
@@ -217,7 +200,7 @@
                 console.log($(this).html());
 
                 $('li').css('background-color', '#1FF627');
-                $('.delete_btn').remove();
+                // $('.delete_btn').remove();
             });
         });
 
